@@ -1,3 +1,4 @@
+
 import Clases.GenerarTxt;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,18 +51,16 @@ public class Problema1 {
             }
         }
 
-        // Acumuladores por categoría
         double subtotalElectronica = 0, gananciaElectronica = 0;
-        double subtotalAccesorios = 0, gananciaAccesorios = 0;
-        double subtotalRedes = 0, gananciaRedes = 0;
+        double subtotalRopa = 0, gananciaRopa = 0;
+        double subtotalMuebles = 0, gananciaMuebles = 0;
 
-        // Acumuladores generales
         double totalVenta = 0;
         double gananciaTotal = 0;
 
         try {
             Scanner myReader = new Scanner(file);
-            if (myReader.hasNextLine()) myReader.nextLine(); // Saltar encabezado
+            if (myReader.hasNextLine()) myReader.nextLine();
 
             System.out.println("ID\tNombre\t\tCategoría\tPrecio\tCantidad\tSubtotal\tGanancia");
 
@@ -84,14 +83,14 @@ public class Problema1 {
                     ganancia = subtotal * 0.20;
                     subtotalElectronica += subtotal;
                     gananciaElectronica += ganancia;
-                } else if (categoria.equalsIgnoreCase("Accesorios")) {
+                } else if (categoria.equalsIgnoreCase("Ropa")) {
                     ganancia = subtotal * 0.10;
-                    subtotalAccesorios += subtotal;
-                    gananciaAccesorios += ganancia;
-                } else if (categoria.equalsIgnoreCase("Redes")) {
+                    subtotalRopa += subtotal;
+                    gananciaRopa += ganancia;
+                } else if (categoria.equalsIgnoreCase("Muebles Oficina")) {
                     ganancia = subtotal * 0.15;
-                    subtotalRedes += subtotal;
-                    gananciaRedes += ganancia;
+                    subtotalMuebles += subtotal;
+                    gananciaMuebles += ganancia;
                 }
 
                 totalVenta += subtotal;
@@ -102,11 +101,10 @@ public class Problema1 {
             }
             myReader.close();
 
-            // RESUMEN CONSOLA
             System.out.println("\nRESUMEN POR CATEGORÍA:");
-            System.out.printf("Electrónica - Subtotal: %.2f | Ganancia: %.2f\n", subtotalElectronica, gananciaElectronica);
-            System.out.printf("Accesorios  - Subtotal: %.2f | Ganancia: %.2f\n", subtotalAccesorios, gananciaAccesorios);
-            System.out.printf("Redes       - Subtotal: %.2f | Ganancia: %.2f\n", subtotalRedes, gananciaRedes);
+            System.out.printf("Electrónica      - Subtotal: %.2f | Ganancia: %.2f\n", subtotalElectronica, gananciaElectronica);
+            System.out.printf("Ropa             - Subtotal: %.2f | Ganancia: %.2f\n", subtotalRopa, gananciaRopa);
+            System.out.printf("Muebles Oficina  - Subtotal: %.2f | Ganancia: %.2f\n", subtotalMuebles, gananciaMuebles);
 
             System.out.println("\nTOTAL GENERAL:");
             System.out.printf("Total Ventas: %.2f\n", totalVenta);
@@ -117,12 +115,11 @@ public class Problema1 {
             e.printStackTrace();
         }
 
-        // Reporte Final
         try (
                 Scanner reader = new Scanner(file);
                 FileWriter fw = new FileWriter(reporteFinal)
         ) {
-            if (reader.hasNextLine()) reader.nextLine(); // Saltar encabezado
+            if (reader.hasNextLine()) reader.nextLine();
 
             fw.write("id,nombre,categoria,precio,cantidad,subtotal,ganancia\n");
 
@@ -142,9 +139,9 @@ public class Problema1 {
 
                 if (categoria.equalsIgnoreCase("Electronica")) {
                     ganancia = subtotal * 0.20;
-                } else if (categoria.equalsIgnoreCase("Accesorios")) {
+                } else if (categoria.equalsIgnoreCase("Ropa")) {
                     ganancia = subtotal * 0.10;
-                } else if (categoria.equalsIgnoreCase("Redes")) {
+                } else if (categoria.equalsIgnoreCase("Muebles Oficina")) {
                     ganancia = subtotal * 0.15;
                 }
 
@@ -152,7 +149,6 @@ public class Problema1 {
                         id, nombre, categoria, precio, cantidad, subtotal, ganancia));
             }
 
-            // Segunda sección con tabulaciones
             fw.write("\nID\tNombre\tCategoría\tPrecio\tCantidad\tSubtotal\tGanancia\n");
 
             Scanner readerTab = new Scanner(file);
@@ -174,9 +170,9 @@ public class Problema1 {
 
                 if (categoria.equalsIgnoreCase("Electronica")) {
                     ganancia = subtotal * 0.20;
-                } else if (categoria.equalsIgnoreCase("Accesorios")) {
+                } else if (categoria.equalsIgnoreCase("Ropa")) {
                     ganancia = subtotal * 0.10;
-                } else if (categoria.equalsIgnoreCase("Redes")) {
+                } else if (categoria.equalsIgnoreCase("Muebles Oficina")) {
                     ganancia = subtotal * 0.15;
                 }
 
@@ -185,11 +181,10 @@ public class Problema1 {
             }
             readerTab.close();
 
-            // Resumen final
             fw.write("\nResumen por categoría:\n");
-            fw.write(String.format("Electrónica - Subtotal: %.2f | Ganancia: %.2f\n", subtotalElectronica, gananciaElectronica));
-            fw.write(String.format("Accesorios  - Subtotal: %.2f | Ganancia: %.2f\n", subtotalAccesorios, gananciaAccesorios));
-            fw.write(String.format("Redes       - Subtotal: %.2f | Ganancia: %.2f\n", subtotalRedes, gananciaRedes));
+            fw.write(String.format("Electrónica      - Subtotal: %.2f | Ganancia: %.2f\n", subtotalElectronica, gananciaElectronica));
+            fw.write(String.format("Ropa             - Subtotal: %.2f | Ganancia: %.2f\n", subtotalRopa, gananciaRopa));
+            fw.write(String.format("Muebles Oficina  - Subtotal: %.2f | Ganancia: %.2f\n", subtotalMuebles, gananciaMuebles));
             fw.write(String.format("\nTotal General de Ventas: %.2f\n", totalVenta));
             fw.write(String.format("Ganancia Total: %.2f\n", gananciaTotal));
 
