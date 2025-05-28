@@ -16,6 +16,30 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
 
+        String rutaBruto = "C:/Lab2/Grupo_03/Reporte_Ganancias_Brutas.txt";
+        String rutaEquipos = "C:/Lab2/Grupo_03/equipos.txt";
+
+        File archivoBruto = new File(rutaBruto);
+        File archivoEquipos = new File(rutaEquipos);
+
+        // Verificar existencia de archivos requeridos
+        boolean archivosExisten = true;
+
+        if (!archivoBruto.exists()) {
+            System.out.println("No se encuentra el archivo: " + archivoBruto.getName());
+            archivosExisten = false;
+        }
+
+        if (!archivoEquipos.exists()) {
+            System.out.println("No se encuentra el archivo: " + archivoEquipos.getName());
+            archivosExisten = false;
+        }
+
+        if (!archivosExisten) {
+            System.out.println("\nFinalizando ejecución. Verifique los archivos requeridos.");
+            return; // Detener ejecución
+        }
+
         //elimina el archivo de reporte_resultados.txt si existe
         File antiguo = new File("C:/Lab2/Grupo_03/reporte_resultados.txt");
 
@@ -34,7 +58,6 @@ public class Main {
 
         // crear archivo nuevo y vacío, luego insertar registros
         String ruta2="C:/Lab2/Grupo_03/Reporte_Ganancias_Brutas.txt";
-        File archivoBruto = new File("C:/Lab2/Grupo_03/Reporte_Ganancias_Brutas.txt");
 
         System.out.println();
         try {
